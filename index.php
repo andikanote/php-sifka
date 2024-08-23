@@ -47,16 +47,13 @@
                     <div class="col-lg-12">
                         <div class="text-center mt-sm-5 mb-4 text-white-50">
                             <div>
-                                <a href="index.html" class="d-inline-block auth-logo">
-                                    <img src="assets/images/logo-light.png" alt="" height="20">
+                                <a href="index.php" class="d-inline-block auth-logo">
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
                         </div>
                     </div>
                 </div>
                 <!-- end row -->
-
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card mt-4 card-bg-fill">
@@ -67,18 +64,55 @@
                                     <p class="text-muted">Sistem Informasi Finance Keuangan.</p>
                                 </div>
                                 <?php
+                                    include '../koneksi.php';
                                     if (isset($_GET['alert'])) {
-                                    if ($_GET['alert'] == "gagal") {
-                                        echo "<div class='alert alert-danger'>LOGIN GAGAL! USERNAME DAN PASSWORD SALAH!</div>";
-                                    } else if ($_GET['alert'] == "logout") {
-                                        echo "<div class='alert alert-success'>ANDA TELAH BERHASIL LOGOUT</div>";
-                                    } else if ($_GET['alert'] == "belum_login") {
-                                        echo "<div class='alert alert-warning'>ANDA HARUS LOGIN UNTUK MENGAKSES DASHBOARD</div>";
+                                        if ($_GET['alert'] == "gagal") {
+                                            echo 
+                                            "
+                                            <center>
+                                                <div class='alert alert-danger material-shadow' role='alert' style='animation: hideMessage 8s forwards;'>
+                                                <strong>USERNAME / PASSWORD SALAH!!</strong>
+                                                </div>
+                                            </center>
+                                            
+                                            <style>
+                                                @keyframes hideMessage {
+                                                0% {
+                                                    opacity: 1;
+                                                }
+                                                100% {
+                                                    opacity: 0;
+                                                    display: none;
+                                                }
+                                                }
+                                            </style>
+                                            ";
+                                        } else if ($_GET['alert'] == "belum_login") {
+                                            echo 
+                                            "
+                                            <center>
+                                                <div class='alert alert-warning material-shadow' role='alert' style='animation: hideMessage 8s forwards;'>
+                                                <strong>ANDA HARUS LOGIN UNTUK MENGAKSES DASHBOARD</strong>
+                                                </div>
+                                            </center>
+                                            
+                                            <style>
+                                                @keyframes hideMessage {
+                                                0% {
+                                                    opacity: 1;
+                                                }
+                                                100% {
+                                                    opacity: 0;
+                                                    display: none;
+                                                }
+                                                }
+                                            </style>
+                                            ";
                                         }
                                     }
                                 ?>
                                 <div class="p-2 mt-4">
-                                <form action="../conf/checkauth.php" method="POST">
+                                <form action="checkauth.php" method="POST">
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Username</label>
                                             <input type="text" class="form-control" placeholder="Username" name="username" required="required" autocomplete="off">
@@ -101,11 +135,18 @@
                                         </div>
                                     </form>
                                 </div>
+                                <div class="mt-4 text-center">
+                                            <div class="signin-other-title">
+                                                <h5 class="fs-13 mb-4 title">Don't have an account ? </h5>
+                                            </div>
+                                            <div>
+                                                <p class="mb-0"><a href="err/pageOffline.php" class="fw-semibold text-primary"> Create Account </a> </p>
+                                            </div>
+                                        </div>
                             </div>
                             <!-- end card body -->
                         </div>
                         <!-- end card -->
-
                         <!-- <div class="mt-4 text-center">
                             <p class="mb-0">Don't have an account ? <a href="auth-signup-basic.html" class="fw-semibold text-primary text-decoration-underline"> Signup </a> </p>
                         </div> -->
@@ -125,7 +166,7 @@
                     <div class="col-lg-12">
                         <div class="text-center">
                             <p class="mb-0 text-muted">&copy;
-                                <script>document.write(new Date().getFullYear())</script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand
+                                <script>document.write(new Date().getFullYear())</script> Coderflix. Crafted with <i class="mdi mdi-heart text-danger"></i> by Hamba Allah
                             </p>
                         </div>
                     </div>

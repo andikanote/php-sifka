@@ -17,8 +17,8 @@ if($cek > 0){
 	$_SESSION['username'] = $data['user_username'];
 	$_SESSION['level'] = $data['user_level'];
 
-	if($data['user_level'] == "administrator"){
-		$_SESSION['status'] = "administrator_logedin";
+	if($data['user_level'] == "Administrator"){
+		$_SESSION['status'] = "Administrator_logedin";
 		header("location:admin/");
 	}else if($data['user_level'] == "manajemen"){
 		$_SESSION['status'] = "manajemen_logedin";
