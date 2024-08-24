@@ -122,7 +122,13 @@
                                                     </th>
                                                     <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
                                                     <td class="customer_name"><?php echo $no++; ?></td>
-                                                    <td class="customer_name"><?php echo $no++; ?></td>
+                                                    <td class="customer_name">
+                                                    <?php if($d['kategori_foto'] == ""){ ?>
+                                                        <img src="../assets/pictures/kategori/default.png" swidth="40" height="40">
+                                                        <?php }else{ ?>
+                                                        <img src="<?php echo '../assets/pictures/kategori/' . $d['kategori_foto']; ?>" alt="<?php echo $d['kategori_foto']; ?>" width="40" height="40">
+                                                        <?php } ?>
+                                                    </td>
                                                     <td class="email"><?php echo $d['kategori']; ?></td>
                                                     <td>
                                                         <div class="d-flex gap-2">
@@ -235,7 +241,7 @@
                         <div class="modal-header bg-light p-3">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
                         </div>
-                        <form action="kategori_act.php" method="post">
+                        <form action="kategori_act.php" method="post" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="customername-field" class="form-label">Category Name</label>
