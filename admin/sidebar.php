@@ -20,10 +20,7 @@
                                         <div class="col-lg-4">
                                             <ul class="nav nav-sm flex-column">
                                             <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-alerts">List Category</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-alerts">Add Category</a>
+                                                    <a href="kategori.php" class="nav-link" data-key="t-alerts">List Category</a>
                                                 </li>
                                             </ul>
                                         </div>
