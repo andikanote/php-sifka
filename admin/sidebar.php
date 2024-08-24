@@ -74,6 +74,8 @@
                                     </div>
                                 </div>
                             </li>
+                            </ul>                       
+                        </div>
                     </li>
                 </div>
                 <!-- Sidebar -->

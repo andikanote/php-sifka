@@ -44,7 +44,7 @@
                         <div class="col-xxl-6">
                             <div class="card">
                                 <div class="card-header align-items-center d-flex">
-                                    <h4 class="card-title mb-0 flex-grow-1">Form Add Users</h4>
+                                    <h4 class="card-title mb-0 flex-grow-1">Form Edit    Users</h4>
                                     <div class="flex-shrink-0">
                                     </div>
                                 </div><!-- end card header -->

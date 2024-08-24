@@ -69,7 +69,7 @@
                     ?>
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="card" id="customerList">
+                            <div class="card" id="userList">
                                 <div class="card-header border-bottom-dashed">
 
                                     <div class="row g-4 align-items-center">
@@ -80,30 +80,16 @@
                                         </div>
                                         <div class="col-sm-auto">
                                             <div class="d-flex flex-wrap align-items-start gap-2">
-                                            <button type="button" class="btn btn-success add-btn" onclick="location.href='user_tambah.php';"><i class="ri-add-line align-bottom me-1"></i> Add Customer</button>                                                <button type="button" class="btn btn-info"><i class="ri-file-download-line align-bottom me-1"></i> Import</button>
+                                            <button type="button" class="btn btn-success add-btn" onclick="location.href='user_tambah.php';"><i class="ri-add-line align-bottom me-1"></i> Add user</button>                                                <button type="button" class="btn btn-info"><i class="ri-file-download-line align-bottom me-1"></i> Import</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-body border-bottom-dashed border-bottom">
-                                    <form>
-                                        <div class="row g-3">
-                                            <div class="col-xl-6">
-                                                <div class="search-box">
-                                                    <input type="text" class="form-control search" placeholder="Search for customer, email, phone, status or something...">
-                                                    <i class="ri-search-line search-icon"></i>
-                                                </div>
-                                            </div>
-                                            <!--end col-->
-                                        </div>
-                                        <!--end row-->
-                                    </form>
                                 </div>
                                 
                                 <div class="card-body">
                                     <div>
                                         <div class="table-responsive table-card mb-1">
-                                            <table class="table align-middle" id="customerTable">
+                                            <table class="table align-middle" id="userTable">
                                                 <thead class="table-light text-muted">
                                                     <tr>
                                                         <th scope="col" style="width: 50px;">
@@ -112,7 +98,7 @@
                                                             </div>
                                                         </th>
 
-                                                        <th class="sort" data-sort="customer_name">Nama</th>
+                                                        <th class="sort" data-sort="user_name">Nama</th>
                                                         <th class="sort" data-sort="email">Username</th>
                                                         <th class="sort" data-sort="phone">Level</th>
                                                         <th class="sort" data-sort="date">Foto</th>
@@ -133,7 +119,7 @@
                                                             </div>
                                                         </th>
                                                         <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
-                                                        <td class="customer_name"><?php echo $d['user_nama']; ?></td>
+                                                        <td class="user_name"><?php echo $d['user_nama']; ?></td>
                                                         <td class="email"><?php echo $d['user_username']; ?></td>
                                                         <td class="status">
                                                             <?php
@@ -186,19 +172,8 @@
                                                 <div class="text-center">
                                                     <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
                                                     <h5 class="mt-2">Sorry! No Result Found</h5>
-                                                    <p class="text-muted mb-0">We've searched more than 150+ customer We did not find any customer for you search.</p>
+                                                    <p class="text-muted mb-0">We've searched user We did not find any user for you search.</p>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-end">
-                                            <div class="pagination-wrap hstack gap-2">
-                                                <a class="page-item pagination-prev disabled" href="#">
-                                                    Previous
-                                                </a>
-                                                <ul class="pagination listjs-pagination mb-0"></ul>
-                                                <a class="page-item pagination-next" href="#">
-                                                    Next
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -267,8 +242,8 @@
     <script src="../assets/libs/list.js/list.min.js"></script>
     <script src="../assets/libs/list.pagination.js/list.pagination.min.js"></script>
 
-    <!--ecommerce-customer init js -->
-    <script src="../assets/js/pages/ecommerce-customer-list.init.js"></script>
+    <!--ecommerce-user init js -->
+    <script src="../assets/js/pages/ecommerce-user-list.init.js"></script>
 
     <!-- Sweet Alerts js -->
     <script src="../assets/libs/sweetalert2/sweetalert2.min.js"></script>
@@ -278,5 +253,5 @@
 </body>
 
 
-<!-- Mirrored from themesbrand.com/velzon/html/master/apps-ecommerce-customers.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Aug 2024 07:46:21 GMT -->
+<!-- Mirrored from themesbrand.com/velzon/html/master/apps-ecommerce-users.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Aug 2024 07:46:21 GMT -->
 </html>
