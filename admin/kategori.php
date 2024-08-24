@@ -102,6 +102,7 @@
                                                     </div>
                                                 </th>
                                                 <th class="sort" data-sort="customer_name" width="8%">No</th>
+                                                <th class="sort" data-sort="email">Image</th>
                                                 <th class="sort" data-sort="email">Nama</th>
                                                 <th class="sort" data-sort="action" width="20%">Action</th>
                                             </tr>
@@ -120,6 +121,7 @@
                                                         </div>
                                                     </th>
                                                     <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
+                                                    <td class="customer_name"><?php echo $no++; ?></td>
                                                     <td class="customer_name"><?php echo $no++; ?></td>
                                                     <td class="email"><?php echo $d['kategori']; ?></td>
                                                     <td>
@@ -238,7 +240,11 @@
                                 <div class="mb-3">
                                     <label for="customername-field" class="form-label">Category Name</label>
                                     <input type="text" name="kategori" required="required" class="form-control" placeholder="Enter category name .." required />
-
+                                </div>
+                                <div class="mb-3">
+                                    <label for="customername-field" class="form-label">Foto Category</label>
+                                    <div class="card">
+                                    <input type="file" name="foto" accept="image/png, image/jpeg, image/gif, image/jpg" required="required" />
                                 </div>
                                 <div class="modal-footer">
                                     <div class="hstack gap-2 justify-content-end">

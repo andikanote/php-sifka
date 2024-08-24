@@ -65,6 +65,15 @@
                                             <input type="password" class="form-control" name="password" required="required" min="5" placeholder="Enter password..">
                                             </div>
                                         <div class="mb-3">
+                                            <label for="customername-field" class="form-label">Foto Users</label>
+                                            <div class="card">
+                                                <input type="file" name="foto" accept="image/png, image/jpeg, image/gif, image/jpg" required="required" />
+                                                <span style="color: red; font-size: xx-small;">
+                                                    File Allowed Only Format JPG, JPEG, GIF, PNG
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="EndleaveDate" class="form-label">Permission Roles</label>
                                             <select class="form-control" name="level" required="required">
                                                 <option value=""> - Pilih Level - </option>
@@ -74,16 +83,6 @@
                                         </div>
                                         <div class="col-lg-6">
                                         <div class="card">
-                                            <div class="card-header">
-                                                <h4 class="card-title mb-0">Foto Picture</h4>
-                                            </div><!-- end card header -->
-                                            <div class="card-body">
-                                                <p class="text-muted">Photo uploads are only allowed in png, jpeg, jpg, gif formats.</p>
-                                                <div class="avatar-xl mx-auto">
-                                                    <input type="file" class="filepond filepond-input-circle" name="foto" accept="image/png, image/jpeg, image/gif, image/jpg" required="required" />
-                                                </div>
-                                            </div>
-                                            <!-- end card body -->
                                         </div>
                                         <!-- end card -->
                                         </div> <!-- end col -->

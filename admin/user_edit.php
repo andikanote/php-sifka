@@ -64,12 +64,21 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="employeeUrl" class="form-label">Username</label>
-                                            <input type="text" class="form-control" name="username" value="<?php echo $d['user_username'] ?>" required="required">
+                                            <input type="text" class="form-control" name="username" value="<?php echo $d['user_username'] ?>" required="required" placeholder="Enter username">
                                             </div>
                                         <div class="mb-3">
                                             <label for="StartleaveDate" class="form-label">Password</label>
-                                            <input type="password" class="form-control" name="password" min="5" placeholder="Kosong Jika tidak ingin di ganti">
+                                            <input type="password" class="form-control" name="password" min="5" placeholder="Blank if you don't want to replace">
                                             </div>
+                                        <div class="mb-3">
+                                            <label for="customername-field" class="form-label">Foto Users</label>
+                                            <div class="card">
+                                                <input type="file" name="foto" accept="image/png, image/jpeg, image/gif, image/jpg"/>
+                                                <span style="color: red; font-size: xx-small;">
+                                                    File Allowed Only Format JPG, JPEG, GIF, PNG
+                                                </span>
+                                            </div>
+                                        </div>
                                         <div class="mb-3">
                                             <label for="EndleaveDate" class="form-label">Permission Roles</label>
                                             <select class="form-control" name="level" required="required">
@@ -78,22 +87,7 @@
                                                 <option <?php if($d['user_level'] == "Manajemen"){echo "selected='selected'";} ?> value="Manajemen"> Manajemen </option>
                                             </select>
                                         </div>
-                                        <div class="col-lg-6">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h4 class="card-title mb-0">Foto Picture</h4>
-                                                <p style="font-size: 8; color: rgb(255, 0, 0); opacity: 0.7;">Ignore if photos are not changed</p>                               
-                                            </div><!-- end card header -->
-                                            <div class="card-body">
-                                                <p class="text-muted">Photo uploads are only allowed in png, jpeg, jpg, gif formats.</p>
-                                                <div class="avatar-xl mx-auto">
-                                                    <input type="file" class="filepond filepond-input-circle" name="foto" accept="image/png, image/jpeg, image/gif, image/jpg" />
-                                                </div>
-                                            </div>
-                                            <!-- end card body -->
-                                        </div>
-                                        <!-- end card -->
-                                        </div> <!-- end col -->
+                                        
                                                 <div class="text-end">
                                                 <a href="user.php" onclick="return true;"><button type="button" class="btn btn-primary">Cancel</button></a>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
