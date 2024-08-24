@@ -1,7 +1,7 @@
-<?php 
+<?php
 include '../koneksi.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$id  = $_POST['id'];
 	$nama  = $_POST['nama'];
 	$username = $_POST['username'];
@@ -13,19 +13,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 	// Check if a file is uploaded
 	if (!empty($_FILES['foto']['name'])) {
-		$file_extension = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);	
+		$file_extension = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
 
 		// Check if the uploaded file has a valid extension
 		if (in_array($file_extension, $allowed_extensions)) {
 			$unique_filename = uniqid() . '_' . $_FILES['foto']['name'];
-			$upload_path = '../assets/pictures/' . $unique_filename;	
+			$upload_path = '../assets/pictures/' . $unique_filename;
 
 			// Move the uploaded file to the destination folder
-			if (move_uploaded_file($_FILES['foto']['tmp_name'], $upload_path))  {
+			if (move_uploaded_file($_FILES['foto']['tmp_name'], $upload_path)) {
 				// Insert the user data into the database
 				$query = "update user set user_nama='$nama', user_username='$username', user_password='$password', user_foto='$unique_filename', user_level='$level' where user_id='$id'";
 				if (mysqli_query($koneksi, $query)) {
-                    header("location:user.php?alert=edit");
+					header("location:user.php?alert=edit");
 					exit;
 				} else {
 					echo "Terjadi kesalahan saat menyimpan data user.";
@@ -47,4 +47,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 		}
 	}
 }
-?>
