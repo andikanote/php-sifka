@@ -70,7 +70,10 @@
                                                         <i class="ri-exchange-dollar-line display-6 text-muted"></i>
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h2 class="mb-0">Rp<span class="counter-value" data-target="100000000">0</span></h2>
+                                                        <h2 class="mb-0">
+                                                        <span style="font-size: 0.8rem;">Rp.</span>
+                                                        <span class="counter-value" data-target="100000000" style="font-size: 1.5rem;">0</span>
+                                                        </h2>
                                                     </div>
                                                 </div>
                                             </div>
@@ -83,7 +86,10 @@
                                                         <i class="ri-exchange-dollar-line display-6 text-muted"></i>
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h2 class="mb-0">Rp<span class="counter-value" data-target="100000000">0</span></h2>
+                                                        <h2 class="mb-0">
+                                                        <span style="font-size: 0.8rem;">Rp.</span>
+                                                        <span class="counter-value" data-target="100000000" style="font-size: 1.5rem;">0</span>
+                                                        </h2>
                                                     </div>
                                                 </div>
                                             </div>
@@ -96,7 +102,10 @@
                                                         <i class="ri-exchange-dollar-line display-6 text-muted"></i>
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h2 class="mb-0">Rp<span class="counter-value" data-target="100000000">0</span></h2>
+                                                        <h2 class="mb-0">
+                                                        <span style="font-size: 0.8rem;">Rp.</span>
+                                                        <span class="counter-value" data-target="100000000" style="font-size: 1.5rem;">0</span>
+                                                        </h2>
                                                     </div>
                                                 </div>
                                             </div>
@@ -135,8 +144,6 @@
                                             <h4 class="text-primary">Rp. 100.000.000 </h4>
                                         </li>
                                     </ul>
-
-                                    <div id="revenue-expenses-charts" data-colors='["--vz-success", "--vz-danger"]' data-colors-minimal='["--vz-primary", "--vz-info"]' data-colors-interactive='["--vz-info", "--vz-primary"]' data-colors-galaxy='["--vz-primary", "--vz-secondary"]' data-colors-classic='["--vz-primary", "--vz-secondary"]' class="apex-charts" dir="ltr"></div>
                                 </div>
                             </div><!-- end card -->
                         </div><!-- end col -->

@@ -4,13 +4,13 @@ session_start();
 $id = $_SESSION['id'];
 
 // Validasi input
-if (empty($_POST['password'])) {
+if (empty($_POST['password']) || strlen($_POST['password']) < 6 || strlen($_POST['password']) > 16) {
     header("location:gantipassword.php?alert=gagal");
     exit;
 }
 
-// Hashing password menggunakan SHA256
-$password = hash('sha256', $_POST['password']);
+// Hashing password menggunakan MD5
+$password = md5($_POST['password']);
 
 try {
     // Jalankan query

@@ -21,10 +21,10 @@
                                     <div class="col-lg-4">
                                         <ul class="nav nav-sm flex-column">
                                         <li class="nav-item">
-                                                <a href="ui-alerts.html" class="nav-link" data-key="t-alerts">List Users</a>
+                                                <a href="user.php" class="nav-link" data-key="t-alerts">List Users</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-alerts.html" class="nav-link" data-key="t-alerts">Add Users</a>
+                                                <a href="user_tambah.php" class="nav-link" data-key="t-alerts">Add Users</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="gantipassword.php" class="nav-link" data-key="t-alerts">Changes Password</a>

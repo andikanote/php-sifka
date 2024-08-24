@@ -111,10 +111,16 @@
                     $profil = mysqli_query($koneksi, "select * from user where user_id='$id_user'");
                     $profil = mysqli_fetch_assoc($profil);
                 ?>
+
                 <div class="dropdown ms-sm-3 header-item topbar-user">
                     <button type="button" class="btn material-shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user" src="../assets/images/users/avatar-1.jpg" alt="Header Avatar">
+                            <?php if ($profil['user_foto'] == "") { ?>
+                                <img class="rounded-circle header-profile-user" src="../assets/pictures/user.png" alt="Header Avatar">
+                            <?php } else { ?>
+                                <img class="rounded-circle header-profile-user" src="../assets/pictures/<?php echo $profil['user_foto'] ?>" alt="Header Avatar">
+                            <?php } ?>
+                            
                             <span class="text-start ms-xl-2">
                                 <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"><?php echo $_SESSION['nama']; ?></span>
                                 <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text"><?php echo $_SESSION['level']; ?></span>

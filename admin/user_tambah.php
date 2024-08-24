@@ -19,7 +19,6 @@
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <div class="main-content">
-
             <div class="page-content">
                 <div class="container-fluid">
 
@@ -32,7 +31,7 @@
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Users</a></li>
-                                        <li class="breadcrumb-item active">Change Password</li>
+                                        <li class="breadcrumb-item active">Add Users</li>
                                     </ol>
                                 </div>
 
@@ -45,49 +44,54 @@
                         <div class="col-xxl-6">
                             <div class="card">
                                 <div class="card-header align-items-center d-flex">
-                                    <h4 class="card-title mb-0 flex-grow-1">Form Change Password</h4>
+                                    <h4 class="card-title mb-0 flex-grow-1">Form Add Users</h4>
                                     <div class="flex-shrink-0">
                                     </div>
                                 </div><!-- end card header -->
 
                                 <div class="card-body">
                                     <div class="live-preview">
-                                        <form action="gantipassword_act.php" method="post">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                <?php 
-                                                    if(isset($_GET['alert'])){
-                                                        if($_GET['alert'] == "sukses"){
-                                                            echo "<div class='alert alert-success' id='alert-message'>Password anda berhasil diuba!</div>
-                                                            <script>
-                                                            setTimeout(function() {
-                                                                document.getElementById('alert-message').style.display = 'none';
-                                                            }, 2000);
-                                                            </script>";
-                                                        } else if ($_GET['alert'] == "gagal") {
-                                                            echo "<div class='alert alert-danger' id='alert-message'>Gagal Change Password, Min 6 & Max 16 Charcater!</div>
-                                                            <script>
-                                                            setTimeout(function() {
-                                                                document.getElementById('alert-message').style.display = 'none';
-                                                            }, 2000);
-                                                            </script>";
-                                                        }
-                                                    }
-                                                ?>
-                                                    <div class="mb-3">
-                                                        <label for="compnayNameinput" class="form-label">Change Password</label>
-                                                        <input type="password" class="form-control" placeholder="Input new password .." name="password" required="required" min="5">
-                                                        <p style="font-size: smaller; color: rgb(255, 0, 0); opacity: 0.7;">*Minimum 6 - Maximal 16 Charcater</p>                                                </div>
-                                                <!--end col-->
-                                                <div class="col-lg-12">
-                                                    <div class="text-end">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </div>
-                                                <!--end col-->
+                                    <form action="user_act.php" method="post" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <label for="employeeName" class="form-label">Name</label>
+                                            <input type="text" class="form-control" name="nama" required="required" placeholder="Enter user name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="employeeUrl" class="form-label">Username</label>
+                                            <input type="text" class="form-control" name="username" required="required" placeholder="Enter username">
                                             </div>
-                                            <!--end row-->
-                                        </form>
+                                        <div class="mb-3">
+                                            <label for="StartleaveDate" class="form-label">Password</label>
+                                            <input type="password" class="form-control" name="password" required="required" min="5" placeholder="Enter password..">
+                                            </div>
+                                        <div class="mb-3">
+                                            <label for="EndleaveDate" class="form-label">Permission Roles</label>
+                                            <select class="form-control" name="level" required="required">
+                                                <option value=""> - Pilih Level - </option>
+                                                <option value="Administrator"> Administrator </option>
+                                                <option value="Manajemen"> Manajemen </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title mb-0">Foto Picture</h4>
+                                            </div><!-- end card header -->
+                                            <div class="card-body">
+                                                <p class="text-muted">Photo uploads are only allowed in png, jpeg, jpg, gif formats.</p>
+                                                <div class="avatar-xl mx-auto">
+                                                    <input type="file" class="filepond filepond-input-circle" name="foto" accept="image/png, image/jpeg, image/gif, image/jpg" required="required" />
+                                                </div>
+                                            </div>
+                                            <!-- end card body -->
+                                        </div>
+                                        <!-- end card -->
+                                        </div> <!-- end col -->
+                                                <div class="text-end">
+                                                <a href="user.php" onclick="return true;"><button type="button" class="btn btn-primary">Cancel</button></a>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
                                     </div>
                                     <div class="d-none code-view">
                                         <pre class="language-markup" style="height: 375px;">
@@ -127,7 +131,4 @@
     <script src="../assets/js/app.js"></script>
 
 </body>
-
-
-<!-- Mirrored from themesbrand.com/velzon/html/master/forms-layouts.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Aug 2024 07:47:43 GMT -->
 </html>
