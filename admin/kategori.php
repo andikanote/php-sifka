@@ -158,7 +158,7 @@
                                                                                                 <br>
                                                                                                 <label for="firstName" class="form-label">Foto Category</label>
                                                                                                 <div class="card">
-                                                                                                <input type="file" name="foto" accept="image/png, image/jpeg, image/gif, image/jpg"/>
+                                                                                                <input class="form-control" type="file" name="foto" id="formFile" accept="image/png, image/jpeg, image/gif, image/jpg"  />
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -258,7 +258,7 @@
                                 <div class="mb-3">
                                     <label for="customername-field" class="form-label">Foto Category</label>
                                     <div class="card">
-                                        <input type="file" name="foto" accept="image/png, image/jpeg, image/gif, image/jpg" required="required" />
+                                        <input class="form-control" type="file" name="foto" id="formFile" accept="image/png, image/jpeg, image/gif, image/jpg"  />
                                     </div>
                                 </div>
                                 <div class="modal-footer">

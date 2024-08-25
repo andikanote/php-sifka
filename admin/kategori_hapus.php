@@ -1,8 +1,13 @@
-<?php 
+<?php
 include '../koneksi.php';
-$id  = $_GET['id'];
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-mysqli_query($koneksi, "update transaksi set transaksi_kategori='1' where transaksi_kategori='$id'");
-
+$id = $_GET['id'];
+$data = mysqli_query($koneksi, "select * from kategori where kategori_id='$id'");
+$d = mysqli_fetch_assoc($data);
+$foto = $d['kategori_foto'];
+unlink("../assets/pictures/kategori/$foto");
 mysqli_query($koneksi, "delete from kategori where kategori_id='$id'");
 header("location:kategori.php?alert=hapus");
+    
