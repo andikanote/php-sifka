@@ -157,6 +157,9 @@
                                                                                             <div>
                                                                                                 <br>
                                                                                                 <label for="firstName" class="form-label">Foto Category</label>
+                                                                                                <span style="color: red; font-size: xx-small;">
+                                                                                                    File Allowed Only Format JPG, JPEG, GIF, PNG
+                                                                                                </span>
                                                                                                 <div class="card">
                                                                                                 <input class="form-control" type="file" name="foto" id="formFile" accept="image/png, image/jpeg, image/gif, image/jpg"  />
                                                                                                 </div>
@@ -257,6 +260,9 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="customername-field" class="form-label">Foto Category</label>
+                                    <span style="color: red; font-size: xx-small;">
+                                                    File Allowed Only Format JPG, JPEG, GIF, PNG
+                                                </span>
                                     <div class="card">
                                         <input class="form-control" required="required" type="file" name="foto" id="formFile" accept="image/png, image/jpeg, image/gif, image/jpg" required/>
                                     </div>
