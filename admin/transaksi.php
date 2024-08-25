@@ -73,6 +73,7 @@
                                                         <th data-sort="keterangan">Keterangan</th>
                                                         <th data-sort="pemasukan" width="15%" >Pemasukan</th>
                                                         <th data-sort="pengeluaran" width="15%">Pengeluaran</th>
+                                                        <th data-sort="pengeluaran" width="15%">Bukti Transaction</th>
                                                         <th data-sort="action" width="13%">Action</th>
                                                     </tr>
                                                 </thead>
@@ -84,7 +85,7 @@
                                                         while($d = mysqli_fetch_array($data)){
                                                     ?>
                                                     <tr>
-                                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
+                                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary"></a></td>
                                                         <td class="customer_name"><center><?php echo $no++; ?></center></td>
                                                         <td class="customer_name"><?php echo date('d-m-Y', strtotime($d['transaksi_tanggal'])); ?></td>
                                                         <td class="email">
@@ -106,13 +107,85 @@
                                                         ?>
                                                         </td>
                                                         <td class="date">
-                                                        <?php 
-                                                            if($d['transaksi_jenis'] == "Pengeluaran"){
-                                                            echo "Rp. ".number_format($d['transaksi_nominal'])." ,-";
-                                                            }else{
-                                                            echo "-";
-                                                            }
-                                                        ?>
+                                                            <?php 
+                                                                if($d['transaksi_jenis'] == "Pengeluaran"){
+                                                                echo "Rp. ".number_format($d['transaksi_nominal'])." ,-";
+                                                                }else{
+                                                                echo "-";
+                                                                }
+                                                            ?>
+                                                        </td>
+                                                        <td class="date">
+                                                            <?php if($d['transaksi_foto'] != ""){ ?>
+                                                                <img src="<?php echo '../assets/pictures/transaksi/' . $d['transaksi_foto']; ?>" alt="<?php echo $d['transaksi_foto']; ?>" width="40" height="40" onclick="showTransactionFoto(this.src)" />
+                                                            <?php } ?>
+                                                                <!-- The Transaction -->
+                                                                <div id="myTransaction" class="Transaction">
+                                                                <!-- <span class="close">&times;</span> -->
+                                                                <img class="Transaction-content" id="img01">
+                                                                </div>
+
+                                                                <style>
+                                                                .Transaction {
+                                                                display: none; /* Hidden by default */
+                                                                position: fixed; /* Stay in place */
+                                                                z-index: 1; /* Sit on top */
+                                                                padding-top: 100px; /* Location of the box */
+                                                                left: 0;
+                                                                top: 0;
+                                                                width: 100%; /* Full width */
+                                                                height: 100%; /* Full height */
+                                                                overflow: auto; /* Enable scroll if needed */
+                                                                
+                                                                }
+
+                                                                .Transaction-content {
+                                                                margin: 20px;
+                                                                width: 300px; /* Adjust the width here */
+                                                                height: 280300pxpx; /* Adjust the height here */
+                                                                border-radius: 5px;
+                                                                position: absolute;
+                                                                top: 50%;
+                                                                left: 50%;
+                                                                transform: translate(-50%, -50%);
+                                                                }
+
+                                                                .close {
+                                                                color: #aaa;
+                                                                float: right;
+                                                                font-size: 28px;
+                                                                font-weight: bold;
+                                                                }
+
+                                                                .close:hover,
+                                                                .close:focus {
+                                                                color: #000;
+                                                                text-decoration: none;
+                                                                cursor: pointer;
+                                                                }
+                                                                </style>
+
+                                                            <script>
+                                                                function showTransactionFoto(src) {
+                                                                var Transaction = document.getElementById("myTransaction");
+                                                                var img = document.getElementById("img01");
+                                                                img.src = src;
+                                                                Transaction.style.display = "block";
+                                                                }
+
+                                                                // Close the Transaction when the user clicks on <span class="close">×</span>
+                                                                    // document.getElementsByClassName("close")[0].onclick = function() {
+                                                                    // var Transaction = document.getElementById("myTransaction");
+                                                                    // Transaction.style.display = "none";
+                                                                    // }
+
+                                                                // Close the Transaction when the user clicks anywhere outside the Transaction content
+                                                                window.onclick = function(event) {
+                                                                if (event.target == document.getElementById("myTransaction")) {
+                                                                    document.getElementById("myTransaction").style.display = "none";
+                                                                }
+                                                                }
+                                                            </script>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex gap-2">
@@ -213,15 +286,15 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="customername-field" class="form-label">Keterangan</label>
-                                    <textarea name="keterangan" class="form-control" rows="3"></textarea>
+                                    <textarea name="keterangan" required="required" class="form-control" rows="3"></textarea>
 
                                 </div>
-                                <!-- <div class="mb-3">
+                                <div class="mb-3">
                                     <label for="customername-field" class="form-label">Upload Bukti Transaction</label>
                                     <div class="card">
-                                        <input class="form-control" type="file" name="foto" id="formFile" accept="image/png, image/jpeg, image/gif, image/jpg"  />
+                                    <input class="form-control" required="required" type="file" name="foto" id="formFile" accept="image/png, image/jpeg, image/gif, image/jpg" required/>
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="modal-footer">
                                     <div class="hstack gap-2 justify-content-end">
                                         <button type="submit" class="btn btn-success" id="add-btn">Add Transaction</button>
