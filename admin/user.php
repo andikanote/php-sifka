@@ -4,7 +4,7 @@
                 <div class="container-fluid">
                 <?php include 'sidebar.php'; ?>
                 </div>
-=            </div>
+           </div>
             <div class="sidebar-background"></div>
         </div>
         <div class="vertical-overlay"></div>
