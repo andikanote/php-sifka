@@ -2,14 +2,14 @@
 include '../koneksi.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
 // Check if form data is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama = $_POST['nama'];
-    $username = $_POST['username'];
-    $password = md5($_POST['password']);
-    $level = $_POST['level'];
+    $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
+    $username = mysqli_real_escape_string($koneksi, $_POST['username']);
+    $password = md5(mysqli_real_escape_string($koneksi, $_POST['password']));
+    $level = mysqli_real_escape_string($koneksi, $_POST['level']);
     $foto = $_FILES['foto'];
-
     $allowed_extensions = array('gif', 'png', 'jpg', 'jpeg');
 
     // Check if a file is uploaded
@@ -23,14 +23,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Move the uploaded file to the destination folder
             if (move_uploaded_file($foto['tmp_name'], $upload_path)) {
-                // Insert the user data into the database
-                $query = "INSERT into user values (NULL,'$nama','$username','$password','$unique_filename','$level')";
-                if (mysqli_query($koneksi, $query)) {
+                // Insert the user data into the database using a prepared statement
+                $stmt = $koneksi->prepare("INSERT INTO user (user_nama, user_username, user_password, user_foto, user_level) VALUES (?, ?, ?, ?, ?)");
+                $stmt->bind_param("sssss", $nama, $username, $password, $unique_filename, $level);
+
+                if ($stmt->execute()) {
                     header("location:user.php?alert=sukses");
                     exit;
                 } else {
                     echo "Terjadi kesalahan saat menyimpan data user.";
                 }
+                $stmt->close();
             } else {
                 echo "Terjadi kesalahan saat mengunggah foto.";
             }
@@ -38,13 +41,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Tipe file foto tidak valid.";
         }
     } else {
-        // Insert the user data without a photo
-        $query = "INSERT INTO user (id, nama, username, password, foto, level) VALUES (NULL, '$nama', '$username', '$password', '', '$level')";
-        if (mysqli_query($koneksi, $query)) {
+        // Insert the user data without a photo using a prepared statement
+        $stmt = $koneksi->prepare("INSERT INTO user (user_nama, user_username, user_password, user_foto, user_level) VALUES (?, ?, ?, '', ?)");
+        $stmt->bind_param("ssss", $nama, $username, $password, $level);
+
+        if ($stmt->execute()) {
             header("location:user.php?alert=sukses");
             exit;
         } else {
             echo "Terjadi kesalahan saat menyimpan data user.";
         }
+        $stmt->close();
     }
 }
