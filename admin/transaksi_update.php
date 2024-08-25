@@ -3,14 +3,13 @@ include '../koneksi.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Check if form data is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = mysqli_real_escape_string($koneksi, $_POST['id']);
     $tanggal = mysqli_real_escape_string($koneksi, $_POST['tanggal']);
-    $jenis = mysqli_real_escape_string($koneksi, $_POST['jenis']);
     $kategori = mysqli_real_escape_string($koneksi, $_POST['kategori']);
-    $nominal = mysqli_real_escape_string($koneksi, $_POST['nominal']);
-    $nominal = floatval($nominal); // Convert the nominal value to a float
     $keterangan = mysqli_real_escape_string($koneksi, $_POST['keterangan']);
+    $nominal = mysqli_real_escape_string($koneksi, $_POST['nominal']);
+    $jenis = mysqli_real_escape_string($koneksi, $_POST['jenis']);
     $bank = mysqli_real_escape_string($koneksi, $_POST['bank']);
     $foto = $_FILES['foto'];
 
@@ -27,15 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Move the uploaded file to the destination folder
             if (move_uploaded_file($foto['tmp_name'], $upload_path)) {
-                // Prepare the SQL query with bound parameters
-                $stmt = $koneksi->prepare("INSERT INTO transaksi (transaksi_tanggal, transaksi_jenis, transaksi_kategori, transaksi_nominal, transaksi_keterangan, transaksi_bank, transaksi_foto) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("sssdsss", $tanggal, $jenis, $kategori, $nominal, $keterangan, $bank, $unique_filename);
-
-                if ($stmt->execute()) {
+                // Update the user data in the database
+                $query = "UPDATE transaksi SET transaksi_tanggal = ?, transaksi_kategori = ?, transaksi_keterangan = ?, transaksi_nominal = ?, transaksi_jenis = ?, transaksi_bank = ?, transaksi_foto = ? WHERE transaksi_id = ?";
+                $stmt = mysqli_prepare($koneksi, $query);
+                mysqli_stmt_bind_param($stmt, "sssdssss", $tanggal, $kategori, $keterangan, $nominal, $jenis, $bank, $unique_filename, $id);
+                if (mysqli_stmt_execute($stmt)) {
                     header("location:transaksi.php?alert=sukses");
                     exit;
                 } else {
-                    echo "Terjadi kesalahan saat menyimpan data transaksi.";
+                    echo "Terjadi kesalahan saat mengupdate data transaksi.";
                 }
             } else {
                 echo "Terjadi kesalahan saat mengunggah foto.";
@@ -44,15 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Tipe file foto tidak valid.";
         }
     } else {
-        // Prepare the SQL query with bound parameters (without photo)
-        $stmt = $koneksi->prepare("INSERT INTO transaksi (transaksi_tanggal, transaksi_jenis, transaksi_kategori, transaksi_nominal, transaksi_keterangan, transaksi_bank, transaksi_foto) VALUES (?, ?, ?, ?, ?, ?, '')");
-        $stmt->bind_param("sssdss", $tanggal, $jenis, $kategori, $nominal, $keterangan, $bank);
-
-        if ($stmt->execute()) {
+        // Update the user data without a photo
+        $query = "UPDATE transaksi SET transaksi_kategori = ?, transaksi_keterangan = ?, transaksi_nominal = ?, transaksi_jenis = ?, transaksi_bank = ? WHERE transaksi_id = ?";
+        $stmt = mysqli_prepare($koneksi, $query);
+        mysqli_stmt_bind_param($stmt, "ssdsss", $kategori, $keterangan, $nominal, $jenis, $bank, $id);
+        if (mysqli_stmt_execute($stmt)) {
             header("location:transaksi.php?alert=sukses");
             exit;
         } else {
-            echo "Terjadi kesalahan saat menyimpan data transaksi.";
+            echo "Terjadi kesalahan saat mengupdate data transaksi.";
         }
     }
 }

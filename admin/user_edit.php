@@ -76,7 +76,7 @@
                                                     File Allowed Only Format JPG, JPEG, GIF, PNG
                                                 </span>
                                             <div class="card">
-                                                <input class="form-control" required="required" type="file" name="foto" id="formFile" accept="image/png, image/jpeg, image/gif, image/jpg" required/>
+                                                <input class="form-control" type="file" name="foto" id="formFile" accept="image/png, image/jpeg, image/gif, image/jpg"/>
                                                 
                                             </div>
                                         </div>

@@ -189,9 +189,93 @@
                                                         </td>
                                                         <td>
                                                             <div class="d-flex gap-2">
-                                                                <div class="edit">
-                                                                    <button class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
+                                                            <div class="edit">
+                                                                <!-- <button class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModalEdit">Edit</button> -->
+                                                                <!-- Grids in modals -->
+                                                                <button type="button" class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#exampleModalEditTrx<?php echo $d['kategori_id'] ?>">
+                                                                    Edit
+                                                                </button>
+                                                                <div class="modal fade" id="exampleModalEditTrx<?php echo $d['kategori_id'] ?>" tabindex="-1" aria-labelledby="exampleModalgridLabel" aria-modal="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalgridLabel">Edit Transaction</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form action="transaksi_update.php" method="post" enctype="multipart/form-data">
+                                                                                    <div class="mb-3">
+                                                                                        <label for="customername-field" class="form-label">Input Date</label>
+                                                                                        <input type="hidden" name="id" value="<?php echo $d['transaksi_id'] ?>">
+                                                                                        <input type="date" name="tanggal" class="form-control" id="exampleInputdate" required="required" value="<?php echo $d['transaksi_tanggal'] ?>">
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="customername-field" class="form-label">Jenis</label>
+                                                                                        <select name="jenis" style="width:100%" class="form-control" required="required">
+                                                                                            <option value="">- Pilih -</option>
+                                                                                            <option <?php if($d['transaksi_jenis'] == "Pemasukan"){echo "selected='selected'";} ?> value="Pemasukan">Pemasukan</option>
+                                                                                            <option <?php if($d['transaksi_jenis'] == "Pengeluaran"){echo "selected='selected'";} ?> value="Pengeluaran">Pengeluaran</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="customername-field" class="form-label">Kategori</label>
+                                                                                        <select name="kategori" style="width:100%" class="form-control" required="required">
+                                                                                            <option value="">- Pilih -</option>
+                                                                                            <?php 
+                                                                                            $kategori = mysqli_query($koneksi,"SELECT * FROM kategori ORDER BY kategori ASC");
+                                                                                            while($k = mysqli_fetch_array($kategori)){
+                                                                                                ?>
+                                                                                                <option <?php if($d['transaksi_kategori'] == $k['kategori_id']){echo "selected='selected'";} ?> value="<?php echo $k['kategori_id']; ?>"><?php echo $k['kategori']; ?></option>
+                                                                                                <?php 
+                                                                                            }
+                                                                                            ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="customername-field" class="form-label">Rekening Bank</label>
+                                                                                        <select name="bank" class="form-control" required="required" style="width:100%">
+                                                                                            <option value="">- Pilih -</option>
+                                                                                            <?php 
+                                                                                            $bank = mysqli_query($koneksi,"SELECT * FROM bank");
+                                                                                            while($b = mysqli_fetch_array($bank)){
+                                                                                                ?>
+                                                                                                <option <?php if($d['transaksi_bank'] == $b['bank_id']){echo "selected='selected'";} ?> value="<?php echo $b['bank_id']; ?>"><?php echo $b['bank_nama']; ?></option>
+                                                                                                <?php 
+                                                                                            }
+                                                                                            ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="customername-field" class="form-label">Nominal</label>
+                                                                                        <input type="number" style="width:100%" name="nominal" required="required" class="form-control" placeholder="Masukkan Nominal .." value="<?php echo $d['transaksi_nominal'] ?>">
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="customername-field" class="form-label">Keterangan</label>
+                                                                                        <textarea name="keterangan" style="width:100%" class="form-control" rows="4"><?php echo $d['transaksi_keterangan'] ?></textarea>
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="customername-field" class="form-label">Upload Bukti Transaction</label>
+                                                                                        <span style="color: red; font-size: xx-small;">
+                                                                                            File Allowed Only Format JPG, JPEG, GIF, PNG
+                                                                                        </span>
+                                                                                        <div class="card">
+                                                                                            <input class="form-control" type="file" name="foto" id="formFile" accept="image/png, image/jpeg, image/gif, image/jpg"/>
+                                                                                        </div>
+                                                                                        <span style="color: red; font-size: xx-small;">
+                                                                                            <b>*Abaikan Upload Bukti Transaksi Jika Tidak Ingin Mengubah!!</b>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                    <div class="col-lg-12">
+                                                                                        <div class="hstack gap-2 justify-content-end">
+                                                                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                                                                        </div>
+                                                                                    </div><!--end col-->
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+                                                            </div>
                                                                 <div class="remove">
                                                                     <button class="btn btn-sm btn-danger remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Remove</button>
                                                                 </div>
