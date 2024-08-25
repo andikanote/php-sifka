@@ -146,14 +146,22 @@
                                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <form action="kategori_update.php" method="post">
+                                                                            <form action="kategori_update.php" method="post" enctype="multipart/form-data">
                                                                                     <div class="row g-3">
                                                                                         <div class="col-xxl-6">
                                                                                             <div>
                                                                                                 <label for="firstName" class="form-label">Category Name</label>
                                                                                                 <input type="hidden" name="id" required="required" class="form-control" placeholder="Nama Kategori .." value="<?php echo $d['kategori_id']; ?>">
-                                                                                                <input type="text" name="kategori" required="required" class="form-control" placeholder="Nama Kategori .." value="<?php echo $d['kategori']; ?>" style="width:100%">                                                                                            </div>
-                                                                                        </div><!--end col-->
+                                                                                                <input type="text" name="kategori" required="required" class="form-control" placeholder="Nama Kategori .." value="<?php echo $d['kategori']; ?>" style="width:100%">   
+                                                                                            </div>
+                                                                                            <div>
+                                                                                                <br>
+                                                                                                <label for="firstName" class="form-label">Foto Category</label>
+                                                                                                <div class="card">
+                                                                                                <input type="file" name="foto" accept="image/png, image/jpeg, image/gif, image/jpg"/>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
                                                                                         <div class="col-lg-12">
                                                                                             <div class="hstack gap-2 justify-content-end">
                                                                                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
@@ -250,7 +258,8 @@
                                 <div class="mb-3">
                                     <label for="customername-field" class="form-label">Foto Category</label>
                                     <div class="card">
-                                    <input type="file" name="foto" accept="image/png, image/jpeg, image/gif, image/jpg" required="required" />
+                                        <input type="file" name="foto" accept="image/png, image/jpeg, image/gif, image/jpg" required="required" />
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <div class="hstack gap-2 justify-content-end">
