@@ -11,7 +11,7 @@
                         </li> <!-- end Dashboard Menu -->
 
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Pages</span></li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link menu-link" href="#sideCategory" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sideCategory">
                                     <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Data Category</span>
                                 </a>
@@ -26,7 +26,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                                 <a class="nav-link menu-link" href="#sideTransaction" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sideTransaction">
                                     <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Data Transaction</span>
@@ -38,9 +38,6 @@
                                             <li class="nav-item">
                                                     <a href="transaksi.php" class="nav-link" data-key="t-alerts">List Transaction</a>
                                                 </li>
-                                                <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-alerts">Add Transaction</a>
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -48,7 +45,7 @@
                             </li>
                             
 
-                        <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Management User</span></li>
+                        <!-- <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Management User</span></li>
                             <li class="nav-item">
                                 <a class="nav-link menu-link" href="#sidebarUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="Users">
                                     <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Users</span>
@@ -72,7 +69,7 @@
                                 </div>
                             </li>
                             </ul>                       
-                        </div>
+                        </div> -->
                     </li>
                 </div>
                 <!-- Sidebar -->
