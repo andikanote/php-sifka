@@ -38,9 +38,6 @@
                                             <li class="nav-item">
                                                     <a href="transaksi.php" class="nav-link" data-key="t-alerts">List Transaction</a>
                                                 </li>
-                                                <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-alerts">Add Transaction</a>
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>

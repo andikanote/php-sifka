@@ -370,7 +370,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="customername-field" class="form-label">Keterangan</label>
-                                    <textarea name="keterangan" required="required" class="form-control" rows="3"></textarea>
+                                    <textarea name="keterangan" required="required" class="form-control" rows="3" placeholder="Enter transaction name in here, Example : Makan Bebek"></textarea>
 
                                 </div>
                                 <div class="mb-3">
