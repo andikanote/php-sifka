@@ -93,8 +93,10 @@
                                                                 <img src="../assets/pictures/kategori/default.png" swidth="25" height="25">
                                                                 <?php }else{ ?>
                                                                 <img src="<?php echo '../assets/pictures/kategori/' . $d['kategori_foto']; ?>" alt="<?php echo $d['kategori_foto']; ?>" width="25" height="25">
-                                                                <?php } ?>
-                                                            <?php echo $d['kategori']; ?> 
+                                                            <?php } ?>
+                                                            <?php echo 
+                                                                $d['kategori']; 
+                                                            ?> 
                                                         </td>
                                                         <td class="phone"><?php echo $d['transaksi_keterangan']; ?></td>
                                                         <td class="date">
@@ -289,7 +291,7 @@
                                                 <div class="text-center">
                                                     <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
                                                     <h5 class="mt-2">Sorry! No Result Found</h5>
-                                                    <p class="text-muted mb-0">We've searched for the data you want, but we didn't find it for your search. more than 150+ Orders We did not find any orders for you search.</p>
+                                                    <p class="text-muted mb-0">We've searched for the data you want, but we didn't find it for your search.</p>
                                                 </div>
                                             </div>
                                         </div>

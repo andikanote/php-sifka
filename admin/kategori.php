@@ -133,8 +133,6 @@
                                                     <td>
                                                         <div class="d-flex gap-2">
                                                             <div class="edit">
-                                                                <!-- <button class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModalEdit">Edit</button> -->
-                                                                <!-- Grids in modals -->
                                                                 <button type="button" class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit<?php echo $d['kategori_id'] ?>">
                                                                     Edit
                                                                 </button>

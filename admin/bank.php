@@ -68,10 +68,11 @@
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th data-sort="namaBank" style="text-align: center;" width="15%">Nama Bank</th>
-                                                        <th data-sort="pemilikRekening" width="20%">Pemilik Rekening</th>
-                                                        <th data-sort="noRekening" width="20%">No Rekening</th>
+                                                        <th data-sort="pemilikRekening" width="15%">Pemilik Rekening</th>
+                                                        <th data-sort="noRekening" width="10%">No Rekening</th>
                                                         <th data-sort="saldo" width="15%">Saldo</th>
-                                                        <th data-sort="saldo" width="15%">Update Date</th>
+                                                        <th data-sort="saldo" width="15%">CreatedAt</th>
+                                                        <th data-sort="saldo" width="15%">UpdateAt</th>
                                                         <th data-sort="action" width="25%">Action</th>
                                                     </tr>
                                                 </thead>
@@ -79,27 +80,109 @@
                                                     <?php 
                                                         include '../koneksi.php';
                                                         $no=1;
-                                                        $data = mysqli_query($koneksi,"SELECT * FROM bank");
+                                                        $data = mysqli_query($koneksi,"SELECT * FROM list_bank, bank WHERE list_bank_id=bank_nama ORDER BY bank_id DESC");
                                                         while($d = mysqli_fetch_array($data)){
                                                     ?>
                                                         <tr>
                                                             <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary"></a></td>
-                                                            <td class="customer_name" style="text-align: center;"><?php echo $d['bank_nama']; ?></td>
+                                                            <td class="customer_name" style="text-align: center;"><?php echo $d['list_bank_name']; ?></td>
                                                             <td class="email"><?php echo $d['bank_pemilik']; ?></td>
                                                             <td class="phone"><?php echo $d['bank_nomor']; ?></td>
                                                             <td class="date"><?php echo "Rp. ".number_format($d['bank_saldo'])." ,-"; ?></td>
-                                                            <td class="date"><?php echo date_format(date_create($d['currentDateTime']), 'd-m-Y H:i:s'); ?></td>
+                                                            <td class="date"><?php echo date_format(date_create($d['created_at']), 'd-m-Y H:i:s'); ?></td>
+                                                            <td class="date">
+                                                                <?php 
+                                                                if (is_null($d['update_at'])) {
+                                                                    echo '-';
+                                                                } else {
+                                                                    echo date_format(date_create($d['update_at']), 'd-m-Y H:i:s'); 
+                                                                }
+                                                                ?>
+                                                            </td>
                                                             <td>
                                                                 <div class="d-flex gap-2">
-                                                                    <div class="edit">
-                                                                        <button class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
-                                                                    </div>
-                                                                    <div class="remove">
-                                                                        <button class="btn btn-sm btn-danger remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Remove</button>
+                                                                <div class="edit">
+                                                                <button type="button" class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit<?php echo $d['bank_id'] ?>">
+                                                                    Edit
+                                                                </button>
+                                                                <div class="modal fade" id="exampleModalEdit<?php echo $d['bank_id'] ?>" tabindex="-1" aria-labelledby="exampleModalgridLabel" aria-modal="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalgridLabel">Edit Bank</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form action="bank_update.php" method="post">
+                                                                                    <div class="mb-3">
+                                                                                        <label for="employeeName" class="form-label">Nama Bank</label>
+                                                                                        <input type="hidden" name="id" value="<?php echo $d['bank_id'] ?>">
+                                                                                        <select name="nama" style="width:100%" class="form-control" required="required">
+                                                                                            <option value="">-- Pilih Bank --</option>
+                                                                                            <?php 
+                                                                                                $listbank = mysqli_query($koneksi, "SELECT * FROM list_bank ORDER BY list_bank_id ASC");
+                                                                                                while($list = mysqli_fetch_array($listbank)){
+                                                                                                    ?>
+                                                                                                    <option <?php if($d['bank_nama'] == $list['list_bank_id']){echo "selected='selected'";} ?> value="<?php echo $list['list_bank_id']; ?>"><?php echo $list['list_bank_name']; ?></option>
+                                                                                                    <?php 
+                                                                                                }
+                                                                                            ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="employeeName" class="form-label">Nama Pemilik Rekening Bank</label>
+                                                                                        <input type="text" name="pemilik" style="width:100%" class="form-control" placeholder="Nama pemiliki rekening bank .." value="<?php echo $d['bank_pemilik']; ?>">
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="employeeName" class="form-label">Nomor Rekening Bank</label>
+                                                                                        <input type="text" name="nomor" style="width:100%" class="form-control" placeholder="Nomor rekening bank .." value="<?php echo $d['bank_nomor']; ?>">
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="employeeName" class="form-label">Saldo Awal</label>
+                                                                                        <input type="number" name="saldo" style="width:100%" required="required" class="form-control" placeholder="Saldo bank .." value="<?php echo $d['bank_saldo']; ?>">
+                                                                                    </div>
+                                                                                    <div class="text-end">
+                                                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
+                                                            </div>
+                                                            <div class="remove">
+                                                                <button class="btn btn-sm btn-danger remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal<?php echo $d['bank_id'] ?>">Remove</button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade zoomIn" id="deleteRecordModal<?php echo $d['bank_id'] ?>" tabindex="-1" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="mt-2 text-center">
+                                                                                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                                                                                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                                                                                        <h4>Are you Sure ?</h4>
+                                                                                        <p class="text-muted mx-4 mb-0">Are you Sure You want to Remove this Record ?</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                                                                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                                                                                    <button type="button" class="btn w-sm btn-danger" id="delete-record" 
+                                                                                            onclick="if (confirm('Are you Sure You want to Remove this Record ?')) {
+                                                                                            window.location.href = 'bank_hapus.php?id=<?php echo $d['bank_id'] ?>';
+                                                                                            }">
+                                                                                    Yes, Delete It!
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>                                                            
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                     <?php } ?>
                                                 </tbody>
                                             </table>
@@ -143,7 +226,17 @@
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="customername-field" class="form-label">Nama Bank</label>
-                                    <input type="text" name="nama" required="required" class="form-control" placeholder="Nama bank ..">
+                                    <select name="nama" class="form-control" required="required">
+                                        <option value="">- Pilih Bank-</option>
+                                    <?php 
+                                        $banklist = mysqli_query($koneksi,"SELECT * FROM list_bank lb ORDER BY list_bank_id ASC");
+                                        while($k = mysqli_fetch_array($banklist)){
+                                            ?>
+                                            <option value="<?php echo $k['list_bank_id']; ?>"><?php echo $k['list_bank_name']; ?></option>
+                                            <?php 
+                                        }
+                                    ?>
+                                    </select>
                                     </div>
                                 <div class="mb-3">
                                     <label for="customername-field" class="form-label">Nama Pemilik Rekening</label>
