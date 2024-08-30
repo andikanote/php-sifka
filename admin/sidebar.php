@@ -43,6 +43,11 @@
                                     </div>
                                 </div>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="bank.php" role="button" aria-expanded="false" aria-controls="sideBank">
+                                    <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Data Rekening Bank</span>
+                                </a>
+                            </li>
                             
 
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Management User</span></li>
