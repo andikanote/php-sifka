@@ -16,6 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $allowed_extensions = array('gif', 'png', 'jpg', 'jpeg');
 
+    // Get current date and time in GMT+7
+    date_default_timezone_set('Asia/Jakarta');
+    $currentDateTime = date("Y-m-d H:i:s"); 
+
     // Check if a file is uploaded
     if (!empty($foto['name'])) {
         $file_extension = pathinfo($foto['name'], PATHINFO_EXTENSION);
@@ -32,11 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->bind_param("sssdsss", $tanggal, $jenis, $kategori, $nominal, $keterangan, $bank, $unique_filename);
 
                 if ($stmt->execute()) {
+                    // Update bank saldo
+                    $rekening = mysqli_query($koneksi, "SELECT * FROM bank WHERE bank_id='$bank'");
+                    $r = mysqli_fetch_assoc($rekening);
+
+                    if ($jenis === "Pemasukan") {
+                        $saldo_sekarang = $r['bank_saldo'];
+                        $total = $saldo_sekarang + $nominal;
+                        mysqli_query($koneksi, "UPDATE bank SET bank_saldo='$total' WHERE bank_id='$bank'");
+                    } elseif ($jenis === "Pengeluaran") {
+                        $saldo_sekarang = $r['bank_saldo'];
+                        $total = $saldo_sekarang - $nominal;
+                        mysqli_query($koneksi, "UPDATE bank SET bank_saldo='$total' WHERE bank_id='$bank'");
+                    }
                     header("location:transaksi.php?alert=sukses");
                     exit;
-                } else {
-                    echo "Terjadi kesalahan saat menyimpan data transaksi.";
-                }
             } else {
                 echo "Terjadi kesalahan saat mengunggah foto.";
             }
@@ -49,11 +63,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("sssdss", $tanggal, $jenis, $kategori, $nominal, $keterangan, $bank);
 
         if ($stmt->execute()) {
+            // Update bank saldo
+            $rekening = mysqli_query($koneksi, "SELECT * FROM bank WHERE bank_id='$bank'");
+            $r = mysqli_fetch_assoc($rekening);
+
+            if ($jenis === "Pemasukan") {
+                $saldo_sekarang = $r['bank_saldo'];
+                $total = $saldo_sekarang + $nominal;
+                mysqli_query($koneksi, "UPDATE bank SET bank_saldo='$total' WHERE bank_id='$bank'");
+            } elseif ($jenis === "Pengeluaran") {
+                $saldo_sekarang = $r['bank_saldo'];
+                $total = $saldo_sekarang - $nominal;
+                mysqli_query($koneksi, "UPDATE bank SET bank_saldo='$total' WHERE bank_id='$bank'");
+            }
+
             header("location:transaksi.php?alert=sukses");
             exit;
         } else {
             echo "Terjadi kesalahan saat menyimpan data transaksi.";
         }
+    }
+    } else {
+        echo "Tipe file foto tidak valid.";
     }
 }
 ?>
