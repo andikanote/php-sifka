@@ -13,7 +13,7 @@
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Pages</span></li>
                             <li class="nav-item">
                                 <a class="nav-link menu-link" href="#sideCategory" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sideCategory">
-                                    <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Data Category</span>
+                                    <i class="ri-database-line"></i> <span data-key="t-base-ui">Data Category</span>
                                 </a>
                                 <div class="collapse menu-dropdown mega-dropdown-menu" id="sideCategory">
                                     <div class="row">
@@ -29,7 +29,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link menu-link" href="#sideTransaction" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sideTransaction">
-                                    <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Data Transaction</span>
+                                    <i class="ri-database-fill"></i> <span data-key="t-base-ui">Data Transaction</span>
                                 </a>
                                 <div class="collapse menu-dropdown mega-dropdown-menu" id="sideTransaction">
                                     <div class="row">
@@ -45,7 +45,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link menu-link" href="bank.php" role="button" aria-expanded="false" aria-controls="sideBank">
-                                    <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Data Rekening Bank</span>
+                                    <i class="ri-bank-card-fill"></i> <span data-key="t-base-ui">Data Rekening Bank</span>
                                 </a>
                             </li>
                             
@@ -53,7 +53,7 @@
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Management User</span></li>
                             <li class="nav-item">
                                 <a class="nav-link menu-link" href="#sidebarUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="Users">
-                                    <i class="ri-pencil-ruler-2-line"></i> <span data-key="t-base-ui">Users</span>
+                                    <i class="ri-user-5-fill"></i> <span data-key="t-base-ui">Users</span>
                                 </a>
                                 <div class="collapse menu-dropdown mega-dropdown-menu" id="sidebarUI">
                                     <div class="row">
