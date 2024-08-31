@@ -48,7 +48,25 @@
                                     <i class="ri-bank-card-fill"></i> <span data-key="t-base-ui">Data Rekening Bank</span>
                                 </a>
                             </li>
-                            
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#sideRincianTransaksi" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sideRincianTransaksi">
+                                <i data-feather="activity"></i><span data-key="t-base-ui">Transaction Details</span>
+                                </a>
+                                <div class="collapse menu-dropdown mega-dropdown-menu" id="sideRincianTransaksi">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="transaksi.php" class="nav-link" data-key="t-alerts">Cash Payment</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="transaksi.php" class="nav-link" data-key="t-alerts">BCA Payment</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
 
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Management User</span></li>
                             <li class="nav-item">
