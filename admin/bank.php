@@ -80,12 +80,12 @@
                                                     <?php 
                                                         include '../koneksi.php';
                                                         $no=1;
-                                                        $data = mysqli_query($koneksi,"SELECT * FROM list_bank, bank WHERE list_bank_id=bank_nama ORDER BY bank_id DESC");
+                                                        $data = mysqli_query($koneksi,"SELECT * FROM list_bank, bank WHERE list_bank_name=bank_nama ORDER BY bank_id DESC");
                                                         while($d = mysqli_fetch_array($data)){
                                                     ?>
                                                         <tr>
                                                             <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary"></a></td>
-                                                            <td class="customer_name" style="text-align: center;"><?php echo $d['list_bank_name']; ?></td>
+                                                            <td class="customer_name" style="text-align: center;"><?php echo $d['bank_nama']; ?></td>
                                                             <td class="email"><?php echo $d['bank_pemilik']; ?></td>
                                                             <td class="phone"><?php echo $d['bank_nomor']; ?></td>
                                                             <td class="date"><?php echo "Rp. ".number_format($d['bank_saldo'])." ,-"; ?></td>
@@ -120,10 +120,10 @@
                                                                                         <select name="nama" style="width:100%" class="form-control" required="required">
                                                                                             <option value="">-- Pilih Bank --</option>
                                                                                             <?php 
-                                                                                                $listbank = mysqli_query($koneksi, "SELECT * FROM list_bank ORDER BY list_bank_id ASC");
+                                                                                                $listbank = mysqli_query($koneksi, "SELECT * FROM list_bank ORDER BY list_bank_name");
                                                                                                 while($list = mysqli_fetch_array($listbank)){
                                                                                                     ?>
-                                                                                                    <option <?php if($d['bank_nama'] == $list['list_bank_id']){echo "selected='selected'";} ?> value="<?php echo $list['list_bank_id']; ?>"><?php echo $list['list_bank_name']; ?></option>
+                                                                                                    <option <?php if($d['bank_nama'] == $list['list_bank_name']){echo "selected='selected'";} ?> value="<?php echo $list['list_bank_name']; ?>"><?php echo $list['list_bank_name']; ?></option>
                                                                                                     <?php 
                                                                                                 }
                                                                                             ?>
@@ -228,14 +228,14 @@
                                     <label for="customername-field" class="form-label">Nama Bank</label>
                                     <select name="nama" class="form-control" required="required">
                                         <option value="">- Pilih Bank-</option>
-                                    <?php 
-                                        $banklist = mysqli_query($koneksi,"SELECT * FROM list_bank lb ORDER BY list_bank_id ASC");
-                                        while($k = mysqli_fetch_array($banklist)){
-                                            ?>
-                                            <option value="<?php echo $k['list_bank_id']; ?>"><?php echo $k['list_bank_name']; ?></option>
-                                            <?php 
-                                        }
-                                    ?>
+                                        <?php 
+                                            $banklist = mysqli_query($koneksi,"SELECT * FROM list_bank ORDER BY list_bank_name");
+                                            while($k = mysqli_fetch_array($banklist)){
+                                                ?>
+                                                <option value="<?php echo $k['list_bank_name']; ?>"><?php echo $k['list_bank_name']; ?></option>
+                                                <?php 
+                                            }
+                                        ?>
                                     </select>
                                     </div>
                                 <div class="mb-3">
