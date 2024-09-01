@@ -68,7 +68,7 @@
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th data-sort="nomor" >No</th>
-                                                        <th class="sort" data-sort="tanggal">Tanggal</th>
+                                                        <th class="sort" data-sort="email">Tanggal</th>
                                                         <th data-sort="kategori" width="10%">Kategori</th>
                                                         <th data-sort="keterangan">Keterangan</th>
                                                         <th data-sort="pemasukan" width="15%" >Pemasukan</th>
@@ -93,8 +93,10 @@
                                                                 <img src="../assets/pictures/kategori/default.png" swidth="25" height="25">
                                                                 <?php }else{ ?>
                                                                 <img src="<?php echo '../assets/pictures/kategori/' . $d['kategori_foto']; ?>" alt="<?php echo $d['kategori_foto']; ?>" width="25" height="25">
-                                                                <?php } ?>
-                                                            <?php echo $d['kategori']; ?> 
+                                                            <?php } ?>
+                                                            <?php echo 
+                                                                $d['kategori']; 
+                                                            ?> 
                                                         </td>
                                                         <td class="phone"><?php echo $d['transaksi_keterangan']; ?></td>
                                                         <td class="date">
@@ -276,9 +278,37 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                                <div class="remove">
-                                                                    <button class="btn btn-sm btn-danger remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Remove</button>
-                                                                </div>
+                                                            <div class="remove">
+                                                                <button class="btn btn-sm btn-danger remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal<?php echo $d['transaksi_id'] ?>">Remove</button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade zoomIn" id="deleteRecordModal<?php echo $d['transaksi_id'] ?>" tabindex="-1" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="mt-2 text-center">
+                                                                                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                                                                                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                                                                                        <h4>Are you Sure ?</h4>
+                                                                                        <p class="text-muted mx-4 mb-0">Are you Sure You want to Remove this Record ?</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                                                                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                                                                                    <button type="button" class="btn w-sm btn-danger" id="delete-record" 
+                                                                                            onclick="if (confirm('Are you Sure You want to Remove this Record ?')) {
+                                                                                            window.location.href = 'transaksi_hapus.php?id=<?php echo $d['transaksi_id'] ?>';
+                                                                                            }">
+                                                                                    Yes, Delete It!
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>                                                            
+                                                            </div>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -289,7 +319,7 @@
                                                 <div class="text-center">
                                                     <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
                                                     <h5 class="mt-2">Sorry! No Result Found</h5>
-                                                    <p class="text-muted mb-0">We've searched for the data you want, but we didn't find it for your search. more than 150+ Orders We did not find any orders for you search.</p>
+                                                    <p class="text-muted mb-0">We've searched for the data you want, but we didn't find it for your search.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -370,7 +400,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="customername-field" class="form-label">Keterangan</label>
-                                    <textarea name="keterangan" required="required" class="form-control" rows="3"></textarea>
+                                    <textarea name="keterangan" required="required" class="form-control" rows="3" placeholder="Enter transaction name in here, Example : Makan Bebek"></textarea>
 
                                 </div>
                                 <div class="mb-3">
