@@ -213,11 +213,14 @@
                                                                                     </div>
                                                                                     <div class="mb-3">
                                                                                         <label for="customername-field" class="form-label">Jenis</label>
-                                                                                        <select name="jenis" style="width:100%" class="form-control" required="required">
+                                                                                        <select name="jenis" style="width:100%" class="form-control" required="required" id="jenis-select">
                                                                                             <option value="">- Pilih -</option>
                                                                                             <option <?php if($d['transaksi_jenis'] == "Pemasukan"){echo "selected='selected'";} ?> value="Pemasukan">Pemasukan</option>
                                                                                             <option <?php if($d['transaksi_jenis'] == "Pengeluaran"){echo "selected='selected'";} ?> value="Pengeluaran">Pengeluaran</option>
                                                                                         </select>
+                                                                                        <script>
+                                                                                            document.getElementById("jenis-select").disabled = true;
+                                                                                        </script>
                                                                                     </div>
                                                                                     <div class="mb-3">
                                                                                         <label for="customername-field" class="form-label">Kategori</label>
@@ -345,7 +348,7 @@
             </div>
             <!-- End Page-content -->
             
-            <!-- start Modal Add Category -->
+            <!-- start Modal Add Transaksi -->
             <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -359,12 +362,15 @@
                                     <input type="date" name="tanggal" class="form-control" id="exampleInputdate" required="required" >
                                 </div>
                                 <div class="mb-3">
-                                    <label for="customername-field" class="form-label">Jenis</label>
+                                    <label for="customername-field" class="form-label">Jenis Transaksi</label>
                                     <select name="jenis" class="form-control" required="required">
                                         <option value="">- Jenis -</option>
                                         <option value="Pemasukan">Pemasukan</option>
                                         <option value="Pengeluaran">Pengeluaran</option>
                                     </select>
+                                    <span style="color: red; font-size: xx-small;">
+                                        <strong>Pilih sesaui transaksi, karena field Jenis Transaksi tidak bisa di ubah pada edit. </strong>
+                                    </span>
                                 </div>
                                 <div class="mb-3">
                                     <label>Kategori</label>
@@ -421,7 +427,7 @@
                         </form>
                     </div>
                 </div>
-            </div><!-- End Modal Add Category -->
+            </div><!-- End Modal Add Transaksi -->
             <?php include 'footer.php'; ?>
         </div>
         <!-- end main content-->
