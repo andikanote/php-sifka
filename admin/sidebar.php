@@ -57,7 +57,7 @@
                                         <div class="col-lg-4">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="transaksi.php" class="nav-link" data-key="t-alerts">Cash Payment</a>
+                                                    <a href="transaksi_cash.php" class="nav-link" data-key="t-alerts">Cash Payment</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="transaksi.php" class="nav-link" data-key="t-alerts">BCA Payment</a>
