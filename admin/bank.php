@@ -87,7 +87,14 @@
                                                             <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary"></a></td>
                                                             <td class="customer_name" style="text-align: center;"><?php echo $d['bank_nama']; ?></td>
                                                             <td class="email"><?php echo $d['bank_pemilik']; ?></td>
-                                                            <td class="phone"><?php echo $d['bank_nomor']; ?></td>
+                                                            <td class="phone">
+                                                                <?php 
+                                                                    $nomor = $d['bank_nomor'];
+                                                                    $awal = substr($nomor, 0, 6); // ambil 6 digit pertama
+                                                                    $akhir = str_repeat("*", strlen($nomor) - 6); // tambahkan * untuk digit lainnya
+                                                                    echo $awal . $akhir; 
+                                                                ?>
+                                                            </td>
                                                             <td class="date"><?php echo "Rp. ".number_format($d['bank_saldo'])." ,-"; ?></td>
                                                             <td class="date"><?php echo date_format(date_create($d['created_at']), 'd-m-Y H:i:s'); ?></td>
                                                             <td class="date">

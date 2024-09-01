@@ -50,7 +50,7 @@
                                         <div class="row g-4 mb-3">
                                             <div class="col-sm-auto">
                                                 <div>
-                                                    <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModalAdd"><i class="ri-add-line align-bottom me-1"></i>Add Bank</button>
+                                                    <!-- <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModalAdd"><i class="ri-add-line align-bottom me-1"></i>Add Bank</button> -->
                                                 </div>
                                             </div>
                                             <div class="col-sm">
