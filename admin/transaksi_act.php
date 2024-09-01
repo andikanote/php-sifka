@@ -20,6 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get current date and time in GMT+7
     date_default_timezone_set('Asia/Jakarta');
     $currentDateTime = date("Y-m-d H:i:s"); 
+    $formattedDate = date("dmY"); 
+    $randomNumber = rand(10000000, 99999999); // Generate a random number
+    $prefixTrx = "trx";
 
     // Check if a file is uploaded
     if (!empty($foto['name'])) {
@@ -57,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     imagecopyresampled($resized_image, $source_image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
                     // Save the resized image
-                    $unique_filename = uniqid() . '_' . $foto['name'];
+                    $unique_filename = $prefixTrx . '-' . $formattedDate . '-' . $randomNumber . '.jpg';
                     $upload_path = '../assets/pictures/transaksi/' . $unique_filename;
 
                     if (imagejpeg($resized_image, $upload_path, 90)) { // Save image as JPEG with quality 90
@@ -73,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             } else {
                 // Move the uploaded file to the destination folder
-                $unique_filename = uniqid() . '_' . $foto['name'];
+                $unique_filename = $prefixTrx . '-' . $formattedDate . '-' . $randomNumber . '.jpg';
                 $upload_path = '../assets/pictures/transaksi/' . $unique_filename;
 
                 if (!move_uploaded_file($foto['tmp_name'], $upload_path)) {
