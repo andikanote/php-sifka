@@ -408,16 +408,64 @@
                                     <label for="customername-field" class="form-label">Keterangan</label>
                                     <textarea name="keterangan" required="required" class="form-control" rows="3" placeholder="Enter transaction name in here, Example : Makan Bebek"></textarea>
 
-                                </div>
+                                </div> 
                                 <div class="mb-3">
                                     <label for="customername-field" class="form-label">Upload Bukti Transaction</label>
                                     <span style="color: red; font-size: xx-small;">
                                         File Allowed Only Format JPG, JPEG, GIF, PNG
                                     </span>
                                     <div class="card">
-                                    <input class="form-control" required="required" type="file" name="foto" id="formFile" accept="image/png, image/jpeg, image/gif, image/jpg" required/>
+                                        <input class="form-control" required="required" type="file" name="foto" id="formFile" accept="image/png, image/jpeg, image/gif, image/jpg" capture="camera" />
                                     </div>
                                 </div>
+                                <script>
+                                    // Fungsi untuk mendeteksi jenis device
+                                    function isMobileDevice() {
+                                        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                                    }
+
+                                    // Jika device yang digunakan adalah mobile, maka tambahkan event listener pada tombol open camera
+                                    if (isMobileDevice()) {
+                                        document.getElementById('open-camera').addEventListener('click', () => {
+                                            // Mengakses kamera menggunakan getUserMedia
+                                            navigator.mediaDevices.getUserMedia({ video: true })
+                                                .then(stream => {
+                                                    // Membuat elemen video untuk menampilkan stream kamera
+                                                    const video = document.createElement('video');
+                                                    video.srcObject = stream;
+                                                    video.play();
+
+                                                    // Membuat tombol untuk mengambil foto
+                                                    const takePictureButton = document.createElement('button');
+                                                    takePictureButton.textContent = 'Take Picture';
+
+                                                    // Mengambil foto dari stream kamera
+                                                    takePictureButton.addEventListener('click', () => {
+                                                        const canvas = document.createElement('canvas');
+                                                        canvas.width = video.videoWidth;
+                                                        canvas.height = video.videoHeight;
+                                                        const ctx = canvas.getContext('2d');
+                                                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                                                        // Mengubah foto menjadi blob
+                                                        canvas.toBlob(blob => {
+                                                            // Mengupload foto
+                                                            const fileInput = document.getElementById('formFile');
+                                                            fileInput.files = [blob];
+                                                        });
+                                                    });
+
+                                                    // Menambahkan elemen video dan tombol take picture ke halaman
+                                                    document.getElementById('formFile').parentNode.appendChild(video);
+                                                    document.getElementById('formFile').parentNode.appendChild(takePictureButton);
+                                                })
+                                                .catch(error => {
+                                                    // Tampilkan pesan error
+                                                    console.error('Error mengakses kamera:', error);
+                                                });
+                                        });
+                                    }
+                                </script>
                                 <div class="modal-footer">
                                     <div class="hstack gap-2 justify-content-end">
                                         <button type="submit" class="btn btn-success" id="add-btn">Add Transaction</button>
