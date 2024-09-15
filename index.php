@@ -96,7 +96,6 @@
         </div>
 
         <div id="input-tab" class="tab-content active">
-            <h2 class="text-xl font-semibold mb-4">Input Transaction</h2>
             <?php
             include '../koneksi.php';
 
