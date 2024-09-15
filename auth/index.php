@@ -1,3 +1,5 @@
+
+text/x-generic index.php ( HTML document, ASCII text )
 <!doctype html>
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable" data-theme="default" data-theme-colors="default">
 
@@ -139,7 +141,7 @@
                                                 <h5 class="fs-13 mb-4 title">Don't have an account ? </h5>
                                             </div>
                                             <div>
-                                                <p class="mb-0"><a href="err/pageOffline.php" class="fw-semibold text-primary"> Create Account </a> </p>
+                                                <p class="mb-0"><a href="../err/pageOffline.php" class="fw-semibold text-primary"> Create Account </a> </p>
                                             </div>
                                         </div>
                             </div>
