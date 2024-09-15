@@ -58,15 +58,18 @@
             display: flex;
             align-items: center;
         }
+
         .alert-success {
             color: #155724;
             background-color: #d4edda;
             border-color: #c3e6cb;
         }
+
         .fade {
             opacity: 1;
             transition: opacity 0.5s ease;
         }
+
         .fade-out {
             opacity: 0;
         }
@@ -95,31 +98,34 @@
         <div id="input-tab" class="tab-content active">
             <h2 class="text-xl font-semibold mb-4">Input Transaction</h2>
             <?php
-                include '../koneksi.php';
-                if (isset($_GET['alert'])) {
-                    if ($_GET['alert'] == "sukses") {
-                        echo
-                        "
-                        <div class='col-sm-12'>
-                            <div id='success-alert' class='alert alert-success fade'>
-                                <i class='start-icon fas fa-check-circle faa-tada animated'></i>
-                                <strong class='font__weight-semibold'>Sukses,</strong> Tambah data transaksi.
-                            </div>
-                        </div>
+            include '../koneksi.php';
 
-                        <script>
-                            setTimeout(function() {
-                                var alert = document.getElementById('success-alert');
-                                alert.classList.add('fade-out');
-                                setTimeout(function() {
-                                    alert.style.display = 'none';
-                                }, 500); // Wait for fade-out transition to complete
-                            }, 2000); // 3 seconds
-                        </script>
-                        ";
-                    }
+            if (isset($_GET['alert'])) {
+                if ($_GET['alert'] === "sukses") {
+                    echo "
+            <div class='col-sm-12'>
+                <div id='success-alert' class='alert alert-success fade'>
+                    <i class='start-icon fas fa-check-circle faa-tada animated'></i>
+                    <strong class='font__weight-semibold'>Berhasil,</strong>  Tambah data transaksi.
+                </div>
+            </div>
+        ";
                 }
+            }
             ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var alert = document.getElementById('success-alert');
+                    if (alert) {
+                        setTimeout(function() {
+                            alert.classList.add('fade-out');
+                            setTimeout(function() {
+                                alert.style.display = 'none';
+                            }, 500); // Wait for fade-out transition to complete
+                        }, 2000); // 2 seconds
+                    }
+                });
+            </script>
             <br>
             <form action="err/transaksi_act.php" method="post" enctype="multipart/form-data">
                 <div>
@@ -145,7 +151,9 @@
                         $kategori = mysqli_query($koneksi, "SELECT * FROM kategori ORDER BY kategori ASC");
                         while ($k = mysqli_fetch_array($kategori)) {
                         ?>
-                            <option value="<?php echo $k['kategori_id']; ?>"><?php echo $k['kategori']; ?></option>
+                            <option value="<?php echo htmlspecialchars($k['kategori_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                                <?php echo htmlspecialchars($k['kategori'], ENT_QUOTES, 'UTF-8'); ?>
+                            </option>
                         <?php
                         }
                         ?>
@@ -160,7 +168,9 @@
                         $bank = mysqli_query($koneksi, "SELECT * FROM bank");
                         while ($b = mysqli_fetch_array($bank)) {
                         ?>
-                            <option value="<?php echo $b['bank_id']; ?>"><?php echo $b['bank_nama']; ?></option>
+                            <option value="<?php echo htmlspecialchars($b['bank_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                                <?php echo htmlspecialchars($b['bank_nama'], ENT_QUOTES, 'UTF-8'); ?>
+                            </option>
                         <?php
                         }
                         ?>
