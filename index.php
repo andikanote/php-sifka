@@ -333,7 +333,7 @@
                         <th class="py-2 px-4 border-b">Pemasukan</th>
                         <th class="py-2 px-4 border-b">Pengeluaran</th>
                         <th class="py-2 px-4 border-b">Bukti Transaksi</th>
-                        <th class="py-2 px-4 border-b">Action</th>
+                        <!-- <th class="py-2 px-4 border-b">Action</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -435,12 +435,12 @@
                                     }
                                 </script>
                             </td>
-                            <td class="py-2 px-4 border-b text-center">
+                            <!-- <td class="py-2 px-4 border-b text-center">
                                 <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                                     <button class="text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded-lg w-full sm:w-auto">Update</button>
                                     <button class="text-white bg-red-500 hover:bg-red-700 py-1 px-2 rounded-lg w-full sm:w-auto">Delete</button>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -461,7 +461,7 @@
                 let hasResults = false;
 
                 rows.forEach(row => {
-                    const keteranganCell = row.cells[2]; // Keterangan is the third cell (index 2)
+                    const keteranganCell = row.cells[3]; // Keterangan is the third cell (index 2)
                     const keteranganText = keteranganCell.textContent.toLowerCase();
                     if (keteranganText.includes(filter)) {
                         row.style.display = '';
