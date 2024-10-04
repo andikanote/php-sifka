@@ -304,22 +304,46 @@
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $limit;
 
-        // Fetch total number of transactions
-        $totalResult = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM transaksi");
+        // Initialize filter variables
+        $startDate = isset($_GET['start_date']) ? $_GET['start_date'] : '';
+        $endDate = isset($_GET['end_date']) ? $_GET['end_date'] : '';
+
+        // Base SQL query
+        $sql = "SELECT * FROM transaksi, kategori WHERE kategori_id = transaksi_kategori";
+
+        // Add date filtering if dates are provided
+        if (!empty($startDate) && !empty($endDate)) {
+            $sql .= " AND transaksi_tanggal BETWEEN '$startDate' AND '$endDate'";
+        }
+
+        // Fetch total number of transactions with filtering
+        $totalResult = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM ($sql) AS filtered");
         $totalData = mysqli_fetch_assoc($totalResult);
         $totalPages = ceil($totalData['total'] / $limit);
 
-        // Fetch transactions for the current page
-        $data = mysqli_query($koneksi, "SELECT * FROM transaksi, kategori WHERE kategori_id = transaksi_kategori ORDER BY transaksi_id DESC LIMIT $limit OFFSET $offset");
+        // Fetch transactions for the current page with filtering
+        $sql .= " ORDER BY transaksi_id DESC LIMIT $limit OFFSET $offset";
+        $data = mysqli_query($koneksi, $sql);
         ?>
 
         <div id="data-tab" class="tab-content mt-6">
             <h2 class="text-xl font-semibold mb-4">Data View Transaction</h2>
 
-            <!-- Search Input -->
-            <div class="mb-4">
-                <input type="text" id="searchInput" placeholder="Search by Keterangan transaksi..." class="mt-1 block w-full p-2 border border-gray-300 rounded">
-            </div>
+            <!-- Date Filter Form -->
+            <form method="GET" class="mb-4 flex flex-col md:flex-row justify-between items-center rounded-lg">
+                <div class="flex items-center mb-2 md:mb-0">
+                    <label for="start_date" class="mr-2 font-medium">Start Date:</label>
+                    <input type="date" name="start_date" value="<?php echo $startDate; ?>" class="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div class="flex items-center mb-2 md:mb-0">
+                    <label for="end_date" class="mr-2 font-medium">End Date:</label>
+                    <input type="date" name="end_date" value="<?php echo $endDate; ?>" class="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div class="flex space-x-4">
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Filter</button>
+                    <a href="?page=<?php echo $page; ?>" class="bg-gray-300 text-black px-4 py-2 rounded-lg hover:bg-gray-400 transition">Reset Filter</a>
+                </div>
+            </form>
 
             <div id="noDataMessage" class="text-red-500 mb-4 hidden">Maaf Data tidak ditemukan</div>
 
@@ -333,14 +357,12 @@
                         <th class="py-2 px-4 border-b">Pemasukan</th>
                         <th class="py-2 px-4 border-b">Pengeluaran</th>
                         <th class="py-2 px-4 border-b">Bukti Transaksi</th>
-                        <!-- <th class="py-2 px-4 border-b">Action</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $no = $offset + 1; // Adjust the number for the current page
                     while ($d = mysqli_fetch_array($data)) {
-                        // Existing code for displaying each transaction...
                     ?>
                         <tr>
                             <td class="py-2 px-4 border-b text-center"><?php echo $no++; ?></td>
@@ -355,101 +377,27 @@
                                     <span style="margin-left: 8px;"><?php echo $d['kategori']; ?></span>
                                 </div>
                             </td>
-                            <td class="py-2 px-4 border-b text-center">
-                                <?php echo $d['transaksi_keterangan']; ?>
-                            </td>
+                            <td class="py-2 px-4 border-b text-center"><?php echo $d['transaksi_keterangan']; ?></td>
                             <td class="py-2 px-4 border-b text-center"><?php echo $d['transaksi_jenis'] == "Pemasukan" ? "Rp. " . number_format($d['transaksi_nominal']) : "-"; ?></td>
                             <td class="py-2 px-4 border-b text-center"><?php echo $d['transaksi_jenis'] == "Pengeluaran" ? "Rp. " . number_format($d['transaksi_nominal']) : "-"; ?></td>
                             <td class="py-2 px-4 border-b text-center">
                                 <?php if ($d['transaksi_foto'] != "") { ?>
                                     <img src="<?php echo 'assets/pictures/transaksi/' . $d['transaksi_foto']; ?>" alt="<?php echo $d['transaksi_foto']; ?>" width="40" height="40" onclick="showTransactionFoto(this.src)" />
                                 <?php } ?>
-                                <!-- The Transaction -->
+                                <!-- The Transaction Modal -->
                                 <div id="myTransaction" class="Transaction">
-                                    <!-- <span class="close">&times;</span> -->
                                     <img class="Transaction-content" id="img01">
                                 </div>
-
-                                <style>
-                                    .Transaction {
-                                        display: none;
-                                        /* Hidden by default */
-                                        position: fixed;
-                                        /* Stay in place */
-                                        z-index: 1;
-                                        /* Sit on top */
-                                        padding-top: 100px;
-                                        /* Location of the box */
-                                        left: 0;
-                                        top: 0;
-                                        width: 100%;
-                                        /* Full width */
-                                        height: 100%;
-                                        /* Full height */
-                                        overflow: auto;
-                                        /* Enable scroll if needed */
-
-                                    }
-
-                                    .Transaction-content {
-                                        margin: 20px;
-                                        width: 300px;
-                                        /* Adjust the width here */
-                                        height: 280300pxpx;
-                                        /* Adjust the height here */
-                                        border-radius: 5px;
-                                        position: absolute;
-                                        top: 50%;
-                                        left: 50%;
-                                        transform: translate(-50%, -50%);
-                                    }
-
-                                    .close {
-                                        color: #aaa;
-                                        float: right;
-                                        font-size: 28px;
-                                        font-weight: bold;
-                                    }
-
-                                    .close:hover,
-                                    .close:focus {
-                                        color: #000;
-                                        text-decoration: none;
-                                        cursor: pointer;
-                                    }
-                                </style>
-
-                                <script>
-                                    function showTransactionFoto(src) {
-                                        var Transaction = document.getElementById("myTransaction");
-                                        var img = document.getElementById("img01");
-                                        img.src = src;
-                                        Transaction.style.display = "block";
-                                    }
-
-                                    // Close the Transaction when the user clicks anywhere outside the Transaction content
-                                    window.onclick = function(event) {
-                                        if (event.target == document.getElementById("myTransaction")) {
-                                            document.getElementById("myTransaction").style.display = "none";
-                                        }
-                                    }
-                                </script>
                             </td>
-                            <!-- <td class="py-2 px-4 border-b text-center">
-                                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                                    <button class="text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded-lg w-full sm:w-auto">Update</button>
-                                    <button class="text-white bg-red-500 hover:bg-red-700 py-1 px-2 rounded-lg w-full sm:w-auto">Delete</button>
-                                </div>
-                            </td> -->
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
 
             <div class="flex justify-between mt-4" id="pagination">
-                <button id="prevBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" <?php if ($page <= 1) echo 'disabled'; ?> onclick="location.href='?page=<?php echo $page - 1; ?>'">Previous</button>
+                <button id="prevBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" <?php if ($page <= 1) echo 'disabled'; ?> onclick="location.href='?page=<?php echo $page - 1; ?>&start_date=<?php echo $startDate; ?>&end_date=<?php echo $endDate; ?>'">Previous</button>
                 <span id="pageInfo" class="self-center">Page <?php echo $page; ?> of <?php echo $totalPages; ?></span>
-                <button id="nextBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" <?php if ($page >= $totalPages) echo 'disabled'; ?> onclick="location.href='?page=<?php echo $page + 1; ?>'">Next</button>
+                <button id="nextBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" <?php if ($page >= $totalPages) echo 'disabled'; ?> onclick="location.href='?page=<?php echo $page + 1; ?>&start_date=<?php echo $startDate; ?>&end_date=<?php echo $endDate; ?>'">Next</button>
             </div>
         </div>
 
@@ -513,19 +461,6 @@
             flatpickr("#input-date", {
                 dateFormat: "Y-m-d",
             });
-
-            // Greeting message based on the current hour
-            const currentHour = new Date().getHours();
-            let greetingMessage = '';
-            if (currentHour < 12) {
-                greetingMessage = 'Selamat Pagi!';
-            } else if (currentHour < 18) {
-                greetingMessage = 'Selamat Siang!';
-            } else {
-                greetingMessage = 'Selamat Sore - Malam!';
-            }
-            $('#greeting-message').text(greetingMessage);
-            $('#greeting-card').show();
 
             // Hide greeting card after 5 seconds
             setTimeout(function() {
