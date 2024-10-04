@@ -383,11 +383,83 @@
                             <td class="py-2 px-4 border-b text-center">
                                 <?php if ($d['transaksi_foto'] != "") { ?>
                                     <img src="<?php echo 'assets/pictures/transaksi/' . $d['transaksi_foto']; ?>" alt="<?php echo $d['transaksi_foto']; ?>" width="40" height="40" onclick="showTransactionFoto(this.src)" />
-                                <?php } ?>
-                                <!-- The Transaction Modal -->
+                                <?php } ?> 
+                                <!-- The Transaction -->
                                 <div id="myTransaction" class="Transaction">
+                                    <!-- <span class="close">&times;</span> -->
                                     <img class="Transaction-content" id="img01">
                                 </div>
+
+                                <style>
+                                    .Transaction {
+                                        display: none;
+                                        /* Hidden by default */
+                                        position: fixed;
+                                        /* Stay in place */
+                                        z-index: 1;
+                                        /* Sit on top */
+                                        padding-top: 100px;
+                                        /* Location of the box */
+                                        left: 0;
+                                        top: 0;
+                                        width: 100%;
+                                        /* Full width */
+                                        height: 100%;
+                                        /* Full height */
+                                        overflow: auto;
+                                        /* Enable scroll if needed */
+
+                                    }
+
+                                    .Transaction-content {
+                                        margin: 20px;
+                                        width: 300px;
+                                        /* Adjust the width here */
+                                        height: 280300pxpx;
+                                        /* Adjust the height here */
+                                        border-radius: 5px;
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        transform: translate(-50%, -50%);
+                                    }
+
+                                    .close {
+                                        color: #aaa;
+                                        float: right;
+                                        font-size: 28px;
+                                        font-weight: bold;
+                                    }
+
+                                    .close:hover,
+                                    .close:focus {
+                                        color: #000;
+                                        text-decoration: none;
+                                        cursor: pointer;
+                                    }
+                                </style>
+
+                                <script>
+                                    function showTransactionFoto(src) {
+                                        var Transaction = document.getElementById("myTransaction");
+                                        var img = document.getElementById("img01");
+                                        img.src = src;
+                                        Transaction.style.display = "block";
+                                    }
+
+                                    // Close the Transaction when the user clicks on <span class="close">×</span>
+                                    // document.getElementsByClassName("close")[0].onclick = function() {
+                                    // var Transaction = document.getElementById("myTransaction");
+                                    // Transaction.style.display = "none";
+                                    // }
+
+                                    // Close the Transaction when the user clicks anywhere outside the Transaction content
+                                    window.onclick = function(event) {
+                                        if (event.target == document.getElementById("myTransaction")) {
+                                            document.getElementById("myTransaction").style.display = "none";
+                                        }
+                                    }
+                                </script>
                             </td>
                         </tr>
                     <?php } ?>
