@@ -72,7 +72,7 @@
                                 ?>
                                     <p class="text-muted">Thank you for using </span> SIFKA</p>
                                     <div class="mt-4">
-                                        <a href="../index.php" class="btn btn-success w-100">Sign In</a>
+                                        <a href="../auth/index.php" class="btn btn-success w-100">Sign In</a>
                                     </div>
                                 </div>
                             </div>
