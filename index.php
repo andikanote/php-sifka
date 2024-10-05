@@ -85,11 +85,6 @@
     <div class="container mx-auto p-5">
         <h1 class="text-2xl font-bold mb-6 text-center">Transaction Management</h1>
 
-        <!-- Greeting Card -->
-        <!-- <div id="greeting-card" class="greeting-card bg-blue-100 p-4 rounded-md mb-6 text-center">
-            <h2 class="text-xl font-semibold" id="greeting-message"></h2>
-        </div> -->
-
         <div class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-4 mb-6">
             <button class="tab-button py-2 px-4 bg-blue-500 text-black rounded mb-2 sm:mb-0" data-target="#input-tab">Input Transaction</button>
             <button class="tab-button py-2 px-4 bg-gray-300 rounded" data-target="#data-tab">Data View Transaction</button>
